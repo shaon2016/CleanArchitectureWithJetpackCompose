@@ -19,7 +19,6 @@ internal fun NavGraphBuilder.mainNavGraph(
         ) {
             HomeScreen { navigationEffect ->
                 when (navigationEffect) {
-                    is HomeContract.Effect.Navigation.NavigateUp -> navController.navigateUp()
                     is HomeContract.Effect.Navigation.ToProductDetail -> navController.navigate(
                         Route.ProductDetails.createRoute(product = navigationEffect.product)
                     )

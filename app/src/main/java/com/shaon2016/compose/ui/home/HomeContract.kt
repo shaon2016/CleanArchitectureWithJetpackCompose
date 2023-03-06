@@ -7,7 +7,6 @@ import com.shaon2016.core.ui.ViewState
 
 internal class HomeContract {
     sealed class Event : ViewEvent {
-        object NavigateUp : Event()
         data class SelectProduct(val product: Product) : Event()
     }
 
@@ -19,7 +18,6 @@ internal class HomeContract {
 
     sealed class Effect : ViewSideEffect {
         sealed class Navigation : Effect() {
-            object NavigateUp : Navigation()
             data class ToProductDetail(val product: Product) : Navigation()
         }
     }

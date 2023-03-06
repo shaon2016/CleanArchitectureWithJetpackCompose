@@ -2,12 +2,9 @@ package com.shaon2016.compose.ui.home
 
 import androidx.lifecycle.viewModelScope
 import com.shaon2016.compose.domain.usecase.ProductListUseCase
-import com.shaon2016.core.di.AppDispatchers
-import com.shaon2016.core.di.Dispatcher
 import com.shaon2016.core.domain.Result
 import com.shaon2016.core.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -48,7 +45,6 @@ internal class HomeViewModel @Inject constructor(
                 setEffect {
                     HomeContract.Effect.Navigation.ToProductDetail(event.product)
                 }
-            is HomeContract.Event.NavigateUp -> setEffect { HomeContract.Effect.Navigation.NavigateUp }
         }
     }
 

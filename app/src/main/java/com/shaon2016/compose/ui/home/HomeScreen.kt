@@ -1,7 +1,7 @@
 package com.shaon2016.compose.ui.home
 
 import android.annotation.SuppressLint
-import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -16,7 +16,6 @@ import com.shaon2016.compose.domain.entity.Product
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 internal fun HomeScreen(
     onNavigationRequested: (navigationEffect: HomeContract.Effect.Navigation) -> Unit
@@ -32,6 +31,14 @@ internal fun HomeScreen(
         }.collect()
     }
 
+    HomeContent(
+        state = state
+    )
+}
+
+@Composable
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+internal fun HomeContent(state: HomeContract.State) {
     Scaffold(
         topBar = {
             ToolbarContent()
@@ -45,12 +52,12 @@ internal fun HomeScreen(
                 )
             }
             DataState.FAIL -> {
-                // TODO error view
+                Text(text = "Fail")
             }
         }
 
         if (state.isLoading) {
-            //   TODO show loading dialog
+            Text(text = "Loading")
         }
     }
 }
@@ -68,8 +75,9 @@ private fun ToolbarContent() {
     }
 }
 
+@VisibleForTesting
 @Composable
-private fun ContentBody(
+internal fun ContentBody(
     products: List<Product>
 ) {
     LazyColumn(

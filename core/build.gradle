@@ -62,4 +62,9 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
+    // testing
+//    implementation "androidx.test.core:$core_test"
+//    implementation "androidx.test:core-ktx:$core_test"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+    implementation "androidx.test:runner:1.5.2"
 }

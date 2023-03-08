@@ -15,10 +15,6 @@ interface ViewSideEffect
 abstract class BaseViewModel<EVENT : ViewEvent, EFFECT : ViewSideEffect, STATE : ViewState>() :
     ViewModel() {
 
-    init {
-        collectEvents()
-    }
-
     // Event
     private val _event = MutableSharedFlow<EVENT>()
 
@@ -34,6 +30,10 @@ abstract class BaseViewModel<EVENT : ViewEvent, EFFECT : ViewSideEffect, STATE :
                 handleEvents(it)
             }
         }
+    }
+
+    init {
+        collectEvents()
     }
 
     // Effect

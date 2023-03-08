@@ -1,11 +1,11 @@
 package com.shaon2016.compose.ui.navigation
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.shaon2016.compose.ui.home.HomeContract
 import com.shaon2016.compose.ui.home.HomeScreen
+import com.shaon2016.compose.ui.productdetails.ProductDetailsScreen
+import com.shaon2016.compose.util.NavArgs.PRODUCT
 
 internal fun NavGraphBuilder.mainNavGraph(
     navController: NavController
@@ -26,9 +26,12 @@ internal fun NavGraphBuilder.mainNavGraph(
             }
         }
         composable(
-            route = Route.ProductDetails.route
+            route = Route.ProductDetails.route,
+            arguments = listOf(
+                navArgument(PRODUCT) { type = NavType.StringType }
+            )
         ) {
-            // TODO Implement product details screen
+            ProductDetailsScreen()
         }
     }
 }

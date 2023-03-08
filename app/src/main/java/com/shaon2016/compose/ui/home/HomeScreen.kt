@@ -2,6 +2,7 @@ package com.shaon2016.compose.ui.home
 
 import android.annotation.SuppressLint
 import androidx.annotation.VisibleForTesting
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -32,13 +33,14 @@ internal fun HomeScreen(
     }
 
     HomeContent(
-        state = state
+        state = state,
+        onEventSent = { vm.setEvent(it) }
     )
 }
 
 @Composable
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-internal fun HomeContent(state: HomeContract.State) {
+internal fun HomeContent(state: HomeContract.State, onEventSent: (HomeContract.Event) -> Unit) {
     Scaffold(
         topBar = {
             ToolbarContent()
@@ -48,7 +50,8 @@ internal fun HomeContent(state: HomeContract.State) {
             DataState.INITIAL -> {}
             DataState.SUCCESS -> {
                 ContentBody(
-                    products = state.products
+                    products = state.products,
+                    onEventSent = onEventSent
                 )
             }
             DataState.FAIL -> {
@@ -78,7 +81,8 @@ private fun ToolbarContent() {
 @VisibleForTesting
 @Composable
 internal fun ContentBody(
-    products: List<Product>
+    products: List<Product>,
+    onEventSent: (HomeContract.Event) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -86,7 +90,10 @@ internal fun ContentBody(
             .padding(horizontal = 16.dp)
     ) {
         items(products.size) {
-            Column {
+            Column(modifier = Modifier
+                .clickable {
+                    onEventSent(HomeContract.Event.SelectProduct(products[it]))
+                }) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = products[it].name)
                 Text(text = products[it].price.toString())
@@ -117,6 +124,7 @@ private fun HomePreview() {
                 name = "Cycle",
                 price = 1400.3
             )
-        )
+        ),
+        onEventSent = {}
     )
 }

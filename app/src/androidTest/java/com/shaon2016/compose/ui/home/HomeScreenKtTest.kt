@@ -43,7 +43,7 @@ internal class HomeScreenKtTest {
             products = listOf(
                 Product(
                     id = "asd",
-                    name = "Bike",
+                    title = "Bike",
                     price = 230.2
                 )
             )
@@ -62,7 +62,7 @@ internal class HomeScreenKtTest {
             .assertDoesNotExist()
 
         composeTestRule
-            .onNodeWithText(state.products[0].name)
+            .onNodeWithText(state.products[0].title)
             .assertExists()
     }
 

@@ -4,6 +4,7 @@ import androidx.navigation.*
 import androidx.navigation.compose.composable
 import com.shaon2016.compose.ui.home.HomeContract
 import com.shaon2016.compose.ui.home.HomeScreen
+import com.shaon2016.compose.ui.productdetails.ProductDetailsContract
 import com.shaon2016.compose.ui.productdetails.ProductDetailsScreen
 import com.shaon2016.compose.util.NavArgs.PRODUCT
 
@@ -31,7 +32,11 @@ internal fun NavGraphBuilder.mainNavGraph(
                 navArgument(PRODUCT) { type = NavType.StringType }
             )
         ) {
-            ProductDetailsScreen()
+            ProductDetailsScreen { navigationEffect ->
+                when (navigationEffect) {
+                    is ProductDetailsContract.Effect.Navigation.NavigateUp -> navController.navigateUp()
+                }
+            }
         }
     }
 }

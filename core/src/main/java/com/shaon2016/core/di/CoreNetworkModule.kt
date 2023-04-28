@@ -12,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -64,9 +65,12 @@ object CoreNetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
+    fun provideRetrofit(
+        @Named("baseUrl") baseUrl: String,
+        okHttpClient: OkHttpClient,
+        moshi: Moshi): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://example.com")
+            .baseUrl(baseUrl)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .build()

@@ -1,5 +1,6 @@
 package com.shaon2016.compose.domain.repository
 
+import com.shaon2016.compose.data.remote.product.Product
 import com.shaon2016.compose.data.remote.product.ProductApiService
 import com.shaon2016.compose.data.remote.product.ProductListResponse
 import com.shaon2016.compose.data.repository.ProductRepository
@@ -30,12 +31,17 @@ internal class ProductRepositoryImplTest {
     fun `verify product fetch is successful`() = runTest {
         whenever(productApiService.fetchProducts())
             .thenReturn(
-                ProductListResponse(
-                    products = listOf(
-                        ProductListResponse.Product(
-                            id = "asd",
-                            name = "Bike",
-                            price = 2000000.34
+                listOf(
+                    Product(
+                        id = 1,
+                        title = "Bike",
+                        price = 100000.34,
+                        description = "",
+                        category = "",
+                        image = "",
+                        rating = Product.Rating(
+                            rate = 3.2,
+                            count = 1
                         )
                     )
                 )

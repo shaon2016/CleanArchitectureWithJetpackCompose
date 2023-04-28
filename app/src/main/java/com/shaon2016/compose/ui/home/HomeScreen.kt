@@ -54,13 +54,26 @@ internal fun HomeContent(state: HomeContract.State, onEventSent: (HomeContract.E
                     onEventSent = onEventSent
                 )
             }
+
             DataState.FAIL -> {
-                Text(text = "Fail")
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(text = "Fail")
+                }
             }
         }
 
         if (state.isLoading) {
-            Text(text = "Loading")
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "Loading")
+            }
         }
     }
 }
@@ -95,8 +108,8 @@ internal fun ContentBody(
                     onEventSent(HomeContract.Event.SelectProduct(products[it]))
                 }) {
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = products[it].name)
-                Text(text = products[it].price.toString())
+                Text(text = products[it].title)
+                Text(text = "Price: ${products[it].price}")
             }
         }
     }
@@ -115,13 +128,13 @@ private fun HomePreview() {
         products = listOf(
             Product(
                 id = "asd",
-                name = "Bike",
+                title = "Bike",
                 price = 20000.3
             ),
 
             Product(
                 id = "asde",
-                name = "Cycle",
+                title = "Cycle",
                 price = 1400.3
             )
         ),

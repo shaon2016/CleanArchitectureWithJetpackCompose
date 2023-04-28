@@ -13,11 +13,13 @@ internal class ProductRepositoryImpl @Inject constructor(
         return try {
             val response = productApiService.fetchProducts()
 
-            val products = response.products.map {
+            val products = response.map {
                 Product(
-                    id = it.id,
-                    name = it.name,
-                    price = it.price
+                    id = it.id.toString(),
+                    title = it.title,
+                    price = it.price,
+                    imageUrl = it.image,
+                    description = it.description
                 )
             }
 

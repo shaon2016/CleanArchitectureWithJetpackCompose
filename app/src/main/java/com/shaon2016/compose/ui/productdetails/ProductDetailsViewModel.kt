@@ -31,7 +31,5 @@ internal class ProductDetailsViewModel @Inject constructor(
 
     }
 
-    override fun setInitialState(): ProductDetailsContract.State {
-        TODO("Not yet implemented")
-    }
+    override fun setInitialState() = ProductDetailsContract.State()
 }

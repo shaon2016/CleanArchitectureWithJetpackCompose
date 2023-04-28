@@ -16,7 +16,7 @@ internal object ApiServiceModule {
     @ActivityRetainedScoped
     @Provides
     fun providerProductListApiService(retrofit: Retrofit): ProductApiService {
-//        return retrofit.create(ProductApiService::class.java)
-        return MockProductApiService()
+        return retrofit.create(ProductApiService::class.java)
+//        return MockProductApiService()
     }
 }

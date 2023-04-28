@@ -6,16 +6,22 @@ import com.shaon2016.core.ui.ViewSideEffect
 import com.shaon2016.core.ui.ViewState
 
 internal class ProductDetailsContract {
-    sealed class Event : ViewEvent
+    sealed class Event : ViewEvent {
+        object NavigateUp : Event()
+    }
 
     data class State(
         val isLoading: Boolean = false,
         val product: Product = Product(
             id = "",
-            name = "",
+            title = "",
             price = 0.0
         )
     ) : ViewState
 
-    sealed class Effect : ViewSideEffect
+    sealed class Effect : ViewSideEffect {
+        sealed class Navigation : Effect() {
+            object NavigateUp : Navigation()
+        }
+    }
 }

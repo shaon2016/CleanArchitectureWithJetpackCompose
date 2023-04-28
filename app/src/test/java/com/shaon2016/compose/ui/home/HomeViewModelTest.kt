@@ -9,11 +9,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.*
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.exceptions.base.MockitoException
-import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -74,13 +70,13 @@ internal class HomeViewModelTest {
 private val products = listOf(
     Product(
         id = "asd",
-        name = "Bike",
+        title = "Bike",
         price = 20000.3
     ),
 
     Product(
         id = "asde",
-        name = "Cycle",
+        title = "Cycle",
         price = 1400.3
     )
 )
